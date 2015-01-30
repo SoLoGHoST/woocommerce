@@ -2,65 +2,7 @@ jQuery( function( $ ) {
 
 	// Orderby
 	$( '.woocommerce-ordering' ).on( 'change', 'select.orderby', function() {
-		if ($(this).val() == "brand")
-		{
-			if ($(this).next('select.brand').hasClass("hide"))
-				$(this).next('select.brand').removeClass("hide");
-		}
-		else
-		{
-			if (typeof isBrand === 'undefined')
-			{
-				var noBrand = false;
-			}
-			else
-			{
-				var noBrand = $(this).next("select.brand").is(":visible") && $(this).next("select.brand").val() == "select-brand";
-			}
-
-			$(this).next("select.brand").remove();
-
-			if (noBrand)
-			{
-				var pathArray = window.location.pathname.split( '/' );
-				var newPath = '';
-
-				if (pathArray[1] == 'product-category' && pathArray[2] != "")
-				{
-					var cats = pathArray[2].split('+');
-					cats.pop();
-					newPath = cats.join("+");
-					var newURL = window.location.protocol + "//" + window.location.host + '/product-category/' + newPath + '/?orderby=' + $(this).val();
-					window.location.href = newURL;
-				}
-			}
-			else
-				$(this).closest('form').submit();
-		}
-	});
-
-	// We will not submit the form for brands!
-	$( '.woocommerce-ordering' ).on( 'change', 'select.brand', function() {
-		if ($(this).val() == "select-brand")
-			return false;
-
-		
-		var pathArray = window.location.pathname.split( '/' );
-		var newPath = '';
-		if (pathArray[1] == 'product-category' && pathArray[2] != "")
-		{
-			if (typeof isBrand === 'undefined')
-				newPath = pathArray[2];
-			else
-			{
-				var cats = pathArray[2].split('+');
-				cats.pop();
-				newPath = cats.join("+");
-			}
-
-			var newURL = window.location.protocol + "//" + window.location.host + '/product-category/' + newPath + '+' + $(this).val() + '/';
-		}
-		window.location.href = newURL;
+		$( this ).closest( 'form' ).submit();
 	});
 
 	// Quantity buttons

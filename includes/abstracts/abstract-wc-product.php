@@ -1311,7 +1311,7 @@ class WC_Product {
 	 * @access public
 	 * @return string
 	 */
-	public function get_dimensions() {
+	public function get_dimensions() {		
 		if ( ! $this->dimensions ) {
 			$dimensions = array();
 
